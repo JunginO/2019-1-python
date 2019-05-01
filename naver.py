@@ -2,6 +2,12 @@ import requests
 
 from bs4 import BeautifulSoup
 
-req = requests.get('https://www.naver.com/')
+r = requests.get('https://www.naver.com/')
 
-print(req.text)
+soup = BeautifulSoup(r.text,'html.parser')
+
+s= soup.find_all('span',{'class':'ah_k'})
+num=0
+for x in s:
+    num=num+1
+    print("%d위:" %num, x.text)

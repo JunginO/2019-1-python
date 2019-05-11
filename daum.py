@@ -6,11 +6,11 @@ r = requests.get('https://www.daum.net/')
 
 soup = BeautifulSoup(r.text,'html.parser')
 
-s= soup.find_all('a',{'class':'link_issue'})
-num=0
-for x in s:
-    num=num+1
-    if num%2 == 0:
-        k=num/2
-        print("%d위:" %k, x.text)
+se = []
+se=soup.select('ol.list_hotissue.issue_row > li ')
 
+num=0
+for s in se:
+        num=num+1
+        k = s.select('div[class=rank_cont]')[0]
+        print(num, '위', k.select_one('span[class=txt_issue]').text)
